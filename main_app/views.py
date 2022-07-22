@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
+from .models import userProfile, transaction
+from .forms import transactionForm
 
 def index(request):
     current_user = request.user
@@ -35,3 +37,13 @@ def loginPage(request):
             redirect('index')
             
     return render(request, 'login.html')
+
+def homePage(request):
+    form = transactionForm
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'home.html', context)
+        
