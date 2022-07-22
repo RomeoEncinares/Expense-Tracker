@@ -13,3 +13,12 @@ class userProfile(models.Model):
 
     def __str__(self):
         return str(self.username)
+
+class transaction(models.Model):
+    username = models.ForeignKey(userProfile, on_delete=models.CASCADE)
+    TRANSACTION_CHOICES = (('S', 'Savings'), ('E', 'Expenses'))
+    transactionType = models.CharField(max_length=1, choices=TRANSACTION_CHOICES)
+    amount = models.FloatField()
+
+    def __str__(self):
+        return "{} {} {:.2f}".format(self.username, self.transactionType, self.amount)
