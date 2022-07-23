@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from .models import userProfile, transaction
 from .forms import transactionForm
 
@@ -40,6 +41,19 @@ def loginPage(request):
 
 def homePage(request):
     form = transactionForm
+
+    currentUserObject = request.user
+    currentUserModel = userProfile.objects.get(username=currentUserObject)
+
+    if request.method == 'POST':
+        transactionType = request.POST.get('transactionType')
+        amount = request.POST.get('amount')
+        
+        if transactionType == 'S':
+            currentUserModel.addTransaction('savings', float(amount))
+        else:
+            currentUserModel.addTransaction('expense', float(amount))
+        currentUserModel.save()
 
     context = {
         'form': form,
