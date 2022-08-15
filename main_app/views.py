@@ -1,3 +1,4 @@
+from re import A
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
@@ -46,6 +47,7 @@ def homePage(request):
     currentUserModel = userProfile.objects.get(username=currentUserObject)
 
     if request.method == 'POST':
+        form = transactionForm(request.POST)
         transactionType = request.POST.get('transactionType')
         amount = request.POST.get('amount')
         
@@ -54,6 +56,8 @@ def homePage(request):
         else:
             currentUserModel.addTransaction('expense', float(amount))
         currentUserModel.save()
+
+        transaction.objects.create(username=currentUserModel, transactionType=transactionType, amount=amount)
 
     context = {
         'form': form,
