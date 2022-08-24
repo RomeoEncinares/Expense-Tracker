@@ -45,6 +45,7 @@ def homePage(request):
 
     currentUserObject = request.user
     currentUserModel = userProfile.objects.get(username=currentUserObject)
+    currentUserBalance = currentUserModel.balance
 
     if request.method == 'POST':
         form = transactionForm(request.POST)
@@ -58,8 +59,11 @@ def homePage(request):
         currentUserModel.save()
 
         transaction.objects.create(username=currentUserModel, transactionType=transactionType, amount=amount)
+        
+        return redirect('home')
 
     context = {
+        'currentUserBalance': currentUserBalance,
         'form': form,
     }
 
