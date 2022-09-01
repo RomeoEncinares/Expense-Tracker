@@ -50,14 +50,20 @@ def homePage(request):
     userTransactionsModelSavings = transaction.objects.filter(username=currentUserModel, transactionType="S")
     userTransactionsModelExpenses = transaction.objects.filter(username=currentUserModel, transactionType="E")
 
+    currentUserTransactions = transaction.objects.filter(username=currentUserModel)
+    recentUserTransactons = currentUserTransactions.order_by('-id')[:3]
+
     savingsAmount = 0
     expensesAmount = 0
+
+    print(recentUserTransactons)
 
     for i in userTransactionsModelSavings:
         savingsAmount += i.amount
     
     for j in userTransactionsModelExpenses:
         expensesAmount += j.amount
+        
     
     if request.method == 'POST':
         form = transactionForm(request.POST)
