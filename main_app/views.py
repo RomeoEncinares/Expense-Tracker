@@ -47,6 +47,18 @@ def homePage(request):
     currentUserModel = userProfile.objects.get(username=currentUserObject)
     currentUserBalance = currentUserModel.balance
 
+    userTransactionsModelSavings = transaction.objects.filter(username=currentUserModel, transactionType="S")
+    userTransactionsModelExpenses = transaction.objects.filter(username=currentUserModel, transactionType="E")
+
+    savingsAmount = 0
+    expensesAmount = 0
+
+    for i in userTransactionsModelSavings:
+        savingsAmount += i.amount
+    
+    for j in userTransactionsModelExpenses:
+        expensesAmount += j.amount
+    
     if request.method == 'POST':
         form = transactionForm(request.POST)
         transactionType = request.POST.get('transactionType')
