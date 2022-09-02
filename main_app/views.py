@@ -56,8 +56,6 @@ def homePage(request):
     savingsAmount = 0
     expensesAmount = 0
 
-    print(recentUserTransactons)
-
     for i in userTransactionsModelSavings:
         savingsAmount += i.amount
     
@@ -83,6 +81,7 @@ def homePage(request):
     context = {
         'currentUserBalance': currentUserBalance,
         'form': form,
+        'recentUserTransactons': recentUserTransactons,
     }
 
     return render(request, 'home.html', context)
