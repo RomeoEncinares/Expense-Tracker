@@ -43,15 +43,15 @@ def loginPage(request):
 def homePage(request):
     form = transactionForm
 
-    currentUserObject = request.user
-    currentUserModel = userProfile.objects.get(username=currentUserObject)
-    currentUserBalance = currentUserModel.balance
+    userObject = request.user
+    userProfileModel = userProfile.objects.get(username=userObject)
+    userBalance = userProfileModel.balance
 
-    userTransactionsModelSavings = transaction.objects.filter(username=currentUserModel, transactionType="S")
-    userTransactionsModelExpenses = transaction.objects.filter(username=currentUserModel, transactionType="E")
+    userTransactionsModelSavings = transaction.objects.filter(username=userProfileModel, transactionType="S")
+    userTransactionsModelExpenses = transaction.objects.filter(username=userProfileModel, transactionType="E")
 
-    currentUserTransactions = transaction.objects.filter(username=currentUserModel)
-    recentUserTransactons = currentUserTransactions.order_by('-id')[:3]
+    userTransactionsModel = transaction.objects.filter(username=userProfileModel)
+    recentUserTransactons = userTransactionsModel.order_by('-id')[:3]
 
     savingsAmount = 0
     expensesAmount = 0
@@ -69,17 +69,17 @@ def homePage(request):
         amount = request.POST.get('amount')
         
         if transactionType == 'S':
-            currentUserModel.addTransaction('savings', float(amount))
+            userProfileModel.addTransaction('savings', float(amount))
         else:
-            currentUserModel.addTransaction('expense', float(amount))
-        currentUserModel.save()
+            userProfileModel.addTransaction('expense', float(amount))
+        userProfileModel.save()
 
-        transaction.objects.create(username=currentUserModel, transactionType=transactionType, amount=amount)
+        transaction.objects.create(username=userProfileModel, transactionType=transactionType, amount=amount)
         
         return redirect('home')
 
     context = {
-        'currentUserBalance': currentUserBalance,
+        'currentUserBalance': userBalance,
         'form': form,
         'recentUserTransactons': recentUserTransactons,
     }
