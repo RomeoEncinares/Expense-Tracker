@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="row">
-                  {% for transactions in recentUserTransactons %}
+                  {% for transactions in recentUserTransactions %}
                   <div class="row">
                     <div class="col">
                       {% if transactions.transactionType == 'E' %}
@@ -91,7 +91,7 @@
                 <h5 class="card-title  ">Summary</h5>
                 <div class="row">
                   <div class="col">
-                    {{currentUserBalance}}
+                    {{userBalance}}
                     <h6 class="card-subtitle mb-2 text-muted">Balance</h6>
                   </div>
                   <div class="col">
