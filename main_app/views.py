@@ -82,6 +82,8 @@ def homePage(request):
         'currentUserBalance': userBalance,
         'form': form,
         'recentUserTransactons': recentUserTransactons,
+        'savingsAmount': savingsAmount,
+        'expensesAmount': expensesAmount,
     }
 
     return render(request, 'home.html', context)
