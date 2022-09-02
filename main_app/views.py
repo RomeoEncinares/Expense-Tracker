@@ -51,7 +51,7 @@ def homePage(request):
     userTransactionsModelExpenses = transaction.objects.filter(username=userProfileModel, transactionType="E")
 
     userTransactionsModel = transaction.objects.filter(username=userProfileModel)
-    recentUserTransactons = userTransactionsModel.order_by('-id')[:3]
+    recentUserTransactions = userTransactionsModel.order_by('-id')[:3]
 
     savingsAmount = 0
     expensesAmount = 0
@@ -79,9 +79,9 @@ def homePage(request):
         return redirect('home')
 
     context = {
-        'currentUserBalance': userBalance,
         'form': form,
-        'recentUserTransactons': recentUserTransactons,
+        'recentUserTransactions': recentUserTransactions,
+        'userBalance': userBalance,
         'savingsAmount': savingsAmount,
         'expensesAmount': expensesAmount,
     }
