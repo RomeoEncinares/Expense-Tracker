@@ -32,53 +32,25 @@
                 </div>
 
                 <div class="row">
-                  <div class="col">
-                    Lorem Ipsum
+                  {% for transactions in recentUserTransactons %}
+                  <div class="row">
+                    <div class="col">
+                      {% if transactions.transactionType == 'E' %}
+                        Expenses
+                      {% else %}
+                        Savings
+                      {% endif %}
+                    </div>
+                    <div class="col">
+                      {{transactions.amount}}
+                    </div>
                   </div>
-                  <div class="col">
-                    1500
-                  </div>
+                    <br>
+                  {% endfor %}
                 </div>
-
-                <div class="row">
-                  <div class="col">
-                    Lorem Ipsum
-                  </div>
-                  <div class="col">
-                    1500
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col">
-                    Lorem Ipsum
-                  </div>
-                  <div class="col">
-                    1500
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col">
-                    Lorem Ipsum
-                  </div>
-                  <div class="col">
-                    1500
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col">
-                    Lorem Ipsum
-                  </div>
-                  <div class="col">
-                    1500
-                  </div>
-                </div>
-
-              </div>
             </div>
           </div>
+        </div>  
 
           <!-- Add Transacton Modal  -->
           <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
