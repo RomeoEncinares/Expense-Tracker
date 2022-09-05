@@ -87,4 +87,6 @@ def homeView(request):
     }
 
     return render(request, 'home.html', context)
-        
+
+def transactionsView(request):
+    return render(request, 'transactions.html')       
