@@ -40,7 +40,7 @@ def loginPage(request):
             
     return render(request, 'login.html')
 
-def homePage(request):
+def homeView(request):
     form = transactionForm
 
     userObject = request.user
