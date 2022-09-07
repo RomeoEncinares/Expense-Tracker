@@ -35,10 +35,10 @@
                   {% for transactions in recentUserTransactions %}
                   <div class="row">
                     <div class="col">
-                      {% if transactions.transactionType == 'E' %}
-                        Expenses
+                      {% if transactions.transactionType == 'Expense' %}
+                        Expense
                       {% else %}
-                        Savings
+                        Income
                       {% endif %}
                     </div>
                     <div class="col">

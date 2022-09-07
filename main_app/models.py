@@ -6,7 +6,7 @@ class userProfile(models.Model):
     balance = models.FloatField(default=0)
 
     def addTransaction(self, type, cost):
-        if type == "savings":
+        if type == "Income":
             self.balance += cost
         else:
             self.balance -= cost
