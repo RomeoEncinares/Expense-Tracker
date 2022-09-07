@@ -18,7 +18,6 @@ class transactionForm(forms.ModelForm):
         ('Others', 'Others'),
     )
     transactionCategory = forms.ChoiceField(widget=forms.RadioSelect(attrs={'id':'transactionType', 'style':'list-style:none'}), choices=CATEGORY_CHOICES)
-
     amount = forms.FloatField(widget=forms.NumberInput(attrs={'class':'form-control', 'id':'amount'}))
     
     class Meta:
