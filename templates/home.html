@@ -72,6 +72,14 @@
                         {% endfor %}
                     </div>
                     <div class="mb-3">
+                      <label for="recipient-name" class="col-form-label">Recipient:</label>
+                        {% for radio in form.transactionCategory %}
+                          <div class="myradio">
+                            {{ radio }}
+                          </div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3">
                       <label for="amount" class="col-form-label">Transaction Type</label>
                       {{form.amount}}
                     </div>
