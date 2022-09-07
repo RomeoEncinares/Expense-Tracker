@@ -47,8 +47,8 @@ def homeView(request):
     userProfileModel = userProfile.objects.get(username=userObject)
     userBalance = userProfileModel.balance
 
-    userTransactionsModelSavings = transaction.objects.filter(username=userProfileModel, transactionType="S")
-    userTransactionsModelExpenses = transaction.objects.filter(username=userProfileModel, transactionType="E")
+    userTransactionsModelSavings = transaction.objects.filter(username=userProfileModel, transactionType="Income")
+    userTransactionsModelExpenses = transaction.objects.filter(username=userProfileModel, transactionType="Expense")
 
     userTransactionsModel = transaction.objects.filter(username=userProfileModel)
     recentUserTransactions = userTransactionsModel.order_by('-id')[:3]
@@ -68,10 +68,10 @@ def homeView(request):
         transactionType = request.POST.get('transactionType')
         amount = request.POST.get('amount')
         
-        if transactionType == 'S':
-            userProfileModel.addTransaction('savings', float(amount))
+        if transactionType == 'Income':
+            userProfileModel.addTransaction('Income', float(amount))
         else:
-            userProfileModel.addTransaction('expense', float(amount))
+            userProfileModel.addTransaction('Expense', float(amount))
         userProfileModel.save()
 
         transaction.objects.create(username=userProfileModel, transactionType=transactionType, amount=amount)
