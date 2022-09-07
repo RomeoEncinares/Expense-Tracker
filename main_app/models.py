@@ -16,8 +16,8 @@ class userProfile(models.Model):
 
 class transaction(models.Model):
     username = models.ForeignKey(userProfile, on_delete=models.CASCADE)
-    TRANSACTION_CHOICES = (('S', 'Savings'), ('E', 'Expenses'))
-    transactionType = models.CharField(max_length=1, choices=TRANSACTION_CHOICES)
+    TRANSACTION_CHOICES = (('Income', 'Income'), ('Expense', 'Expense'))
+    transactionType = models.CharField(max_length=10, choices=TRANSACTION_CHOICES)
     CATEGORY_CHOICES = (
         ('Food & Drinks', 'Food & Drinks'),
         ('Shoppin', 'Shopping'),
