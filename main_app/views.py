@@ -66,6 +66,7 @@ def homeView(request):
     if request.method == 'POST':
         form = transactionForm(request.POST)
         transactionType = request.POST.get('transactionType')
+        transactionCategory = request.POST.get('transactionCategory')
         amount = request.POST.get('amount')
         
         if transactionType == 'Income':
@@ -74,7 +75,7 @@ def homeView(request):
             userProfileModel.addTransaction('Expense', float(amount))
         userProfileModel.save()
 
-        transaction.objects.create(username=userProfileModel, transactionType=transactionType, amount=amount)
+        transaction.objects.create(username=userProfileModel, transactionType=transactionType, transactionCategory=transactionCategory, amount=amount)
         
         return redirect('home')
 
