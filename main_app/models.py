@@ -19,19 +19,19 @@ class transaction(models.Model):
     TRANSACTION_CHOICES = (('S', 'Savings'), ('E', 'Expenses'))
     transactionType = models.CharField(max_length=1, choices=TRANSACTION_CHOICES)
     CATEGORY_CHOICES = (
-        ('FD', 'FOOD & DRINKS'),
-        ('SH', 'SHOPPING'),
-        ('HO', 'HOUSING'),
-        ('TR', 'TRANSPORTATION'),
-        ('VE', 'VEHICLE'),
-        ('LE', 'LIFE & ENTERTAINMENT'),
-        ('PC', 'PC, COMMUNICATION'),
-        ('FE', 'FINANCIAL EXPENSES'),
-        ('IV', 'INVESTMENT'),
-        ('IC', 'INCOME'),
-        ('OT', 'OTHERS'),
+        ('Food & Drinks', 'Food & Drinks'),
+        ('Shoppin', 'Shopping'),
+        ('Housing', 'Housing'),
+        ('Transportation', 'Transportation'),
+        ('Vehicle', 'Vehicle'),
+        ('Life & Entertainment', 'Life & Entertainment'),
+        ('PC, Communication', 'PC, Communication'),
+        ('Financial Investment', 'Financial Investment'),
+        ('Investment', 'Investment'),
+        ('Income', 'Income'),
+        ('Others', 'Others'),
     )
-    transactionCategory = models.CharField(max_length=2, choices=CATEGORY_CHOICES)
+    transactionCategory = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
     amount = models.FloatField()
 
     def __str__(self):
