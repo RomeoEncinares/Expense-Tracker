@@ -64,7 +64,7 @@
                   <form method="POST">
                     {% csrf_token %}
                     <div class="mb-3">
-                      <label for="recipient-name" class="col-form-label">Recipient:</label>
+                      <label for="recipient-name" class="col-form-label"></label>
                         {% for radio in form.transactionType %}
                           <div class="myradio">
                             {{ radio }}
@@ -72,12 +72,17 @@
                         {% endfor %}
                     </div>
                     <div class="mb-3">
-                      <label for="recipient-name" class="col-form-label">Recipient:</label>
-                        {% for radio in form.transactionCategory %}
-                          <div class="myradio">
-                            {{ radio }}
-                          </div>
-                        {% endfor %}
+                      <label for="recipient-name" class="col-form-label">Category</label>
+                      <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Dropdown button
+                        </button>
+                        <ul class="dropdown-menu">
+                          {% for radio in form.transactionCategory %}
+                            <li><a class="dropdown-item" href="#">{{ radio }}</a></li>
+                          {% endfor %}
+                        </ul>
+                      </div>
                     </div>
                     <div class="mb-3">
                       <label for="amount" class="col-form-label">Transaction Type</label>
