@@ -73,16 +73,7 @@
                     </div>
                     <div class="mb-3">
                       <label for="recipient-name" class="col-form-label">Category</label>
-                      <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Dropdown button
-                        </button>
-                        <ul class="dropdown-menu">
-                          {% for radio in form.transactionCategory %}
-                            <li><a class="dropdown-item" href="#">{{ radio }}</a></li>
-                          {% endfor %}
-                        </ul>
-                      </div>
+                      {{ form.transactionCategory }}
                     </div>
                     <div class="mb-3">
                       <label for="amount" class="col-form-label">Transaction Type</label>
