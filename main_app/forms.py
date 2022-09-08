@@ -6,7 +6,7 @@ class transactionForm(forms.ModelForm):
     transactionType = forms.ChoiceField(widget=forms.RadioSelect(attrs={'id':'transactionType', 'style':'list-style:none'}), choices=TRANSACTION_CHOICES)
     CATEGORY_CHOICES = (
         ('Food & Drinks', 'Food & Drinks'),
-        ('Shoppin', 'Shopping'),
+        ('Shopping', 'Shopping'),
         ('Housing', 'Housing'),
         ('Transportation', 'Transportation'),
         ('Vehicle', 'Vehicle'),
