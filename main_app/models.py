@@ -20,7 +20,7 @@ class transaction(models.Model):
     transactionType = models.CharField(max_length=10, choices=TRANSACTION_CHOICES)
     CATEGORY_CHOICES = (
         ('Food & Drinks', 'Food & Drinks'),
-        ('Shoppin', 'Shopping'),
+        ('Shopping', 'Shopping'),
         ('Housing', 'Housing'),
         ('Transportation', 'Transportation'),
         ('Vehicle', 'Vehicle'),
