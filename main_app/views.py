@@ -90,4 +90,13 @@ def homeView(request):
     return render(request, 'home.html', context)
 
 def transactionsView(request):
-    return render(request, 'transactions.html')       
+
+    userObject = request.user
+    userProfileModel = userProfile.objects.get(username=userObject)
+    userTransactionsModel = transaction.objects.filter(username=userProfileModel)
+
+    context = {
+        'userTransactionsModel': userTransactionsModel,
+    }
+    
+    return render(request, 'transactions.html', context)       
