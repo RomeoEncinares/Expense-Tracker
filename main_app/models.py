@@ -1,18 +1,27 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 
 class userProfile(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE)
-    balance = models.FloatField(default=0)
+    currentBalance = models.FloatField(default=0)
 
     def addTransaction(self, type, cost):
         if type == "Income":
-            self.balance += cost
+            self.currentBalance += cost
         else:
-            self.balance -= cost
+            self.currentBalance -= cost
 
     def __str__(self):
         return str(self.username)
+
+class balanceRecord(models.Model):
+    username = models.ForeignKey(userProfile, on_delete=models.CASCADE)
+    balance  = models.FloatField(default=0)
+    date = models.DateField(default=now)
+
+    def _str__(self):
+        return "{} {:.2f} {}".format(self.username, self.balance, self.date)
 
 class transaction(models.Model):
     username = models.ForeignKey(userProfile, on_delete=models.CASCADE)
