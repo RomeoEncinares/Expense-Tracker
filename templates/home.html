@@ -105,13 +105,37 @@
             </div>
           </div>
 
+          {% comment %} <div class="col">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title  ">Summary</h5>
+                <div class="row">
+                  <div class="col">
+                    {{userBalance}}
+                    <h6 class="card-subtitle mb-2 text-muted">Balance</h6>
+                  </div>
+                  <div class="col">
+                    {{savingsAmount}}
+                    <h6 class="card-subtitle mb-2 text-muted">Saved</h6>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    {{expensesAmount}}
+                    <h6 class="card-subtitle mb-2 text-muted">Spent</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> {% endcomment %}
+
           <div class="col">
             <div class="card" style="width: 18rem;">
               <div class="card-body">
                 <h5 class="card-title">Summary</h5>
-                <canvas id="balanceDoughnutChart" width="250" height="250"></canvas>
+                <canvas id="balanceDoughnut" width="250" height="250"></canvas>
                 <script>
-                const ctx = document.getElementById('myChart').getContext('2d');
+                const ctx = document.getElementById('balanceDoughnut').getContext('2d');
                 const myChart = new Chart(ctx, {
                     type: 'doughnut',
                     data: {
