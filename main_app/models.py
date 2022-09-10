@@ -41,6 +41,7 @@ class transaction(models.Model):
         ('Others', 'Others'),
     )
     transactionCategory = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
+    date = models.DateField(default=now)
     amount = models.FloatField()
 
     def __str__(self):
