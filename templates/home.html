@@ -104,13 +104,41 @@
               </div>
             </div>
           </div>
+
           <div class="col">
-
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Summary</h5>
+                <canvas id="balanceDoughnutChart" width="250" height="250"></canvas>
+                <script>
+                const ctx = document.getElementById('myChart').getContext('2d');
+                const myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Income', 'Expenses'],
+                        datasets: [{
+                            label: 'Balance Breakdown',
+                            data: ['{{savingsAmount}}', '{{expensesAmount}}'],
+                            backgroundColor: [
+                              'rgb(255, 99, 132)',
+                              'rgb(54, 162, 235)',
+                              'rgb(255, 205, 86)'
+                            ],
+                            borderColor: [
+                              'rgb(255, 99, 132)',
+                              'rgb(54, 162, 235)',
+                              'rgb(255, 205, 86)'
+                            ],
+                            borderWidth: 1,
+                            hoverOffset: 5
+                        }]
+                    },
+                });
+                </script>                
+              </div>
+            </div>
           </div>
-          
-
         </div>
-
 </body>
     
 {% endblock %}
