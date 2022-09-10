@@ -1,9 +1,10 @@
+from datetime import date
 from re import A
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import userProfile, transaction
+from .models import userProfile, balanceRecord, transaction
 from .forms import transactionForm
 
 def index(request):
@@ -45,7 +46,7 @@ def homeView(request):
 
     userObject = request.user
     userProfileModel = userProfile.objects.get(username=userObject)
-    userBalance = userProfileModel.balance
+    userBalance = userProfileModel.currentBalance
 
     userTransactionsModelSavings = transaction.objects.filter(username=userProfileModel, transactionType="Income")
     userTransactionsModelExpenses = transaction.objects.filter(username=userProfileModel, transactionType="Expense")
@@ -71,8 +72,10 @@ def homeView(request):
         
         if transactionType == 'Income':
             userProfileModel.addTransaction('Income', float(amount))
+            balanceRecord.objects.create(username=userProfileModel, balance=userBalance+float(amount))
         else:
             userProfileModel.addTransaction('Expense', float(amount))
+            balanceRecord.objects.create(username=userProfileModel, balance=userBalance-float(amount))
         userProfileModel.save()
 
         transaction.objects.create(username=userProfileModel, transactionType=transactionType, transactionCategory=transactionCategory, amount=amount)
