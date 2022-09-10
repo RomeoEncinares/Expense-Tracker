@@ -20,7 +20,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for transactions in userTransactionsModel %}
+        {% for transactions in userTransactionsModel reversed %}
           <tr>
             <td>{{transactions.date}}</td>
             <td>{{transactions.transactionType}}</td>
