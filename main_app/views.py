@@ -45,7 +45,7 @@ def homeView(request):
 
     userObject = request.user
     userProfileModel = userProfile.objects.get(username=userObject)
-    userBalance = userProfileModel.balance
+    userBalance = userProfileModel.currentBalance
 
     userTransactionsModelSavings = transaction.objects.filter(username=userProfileModel, transactionType="Income")
     userTransactionsModelExpenses = transaction.objects.filter(username=userProfileModel, transactionType="Expense")
