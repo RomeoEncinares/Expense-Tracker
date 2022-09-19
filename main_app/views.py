@@ -62,7 +62,9 @@ def homeView(request):
     
     for j in userTransactionsModelExpenses:
         expensesAmount += j.amount
-        
+    
+    balanceRecordModel = balanceRecord.objects.filter(username=userProfileModel)
+    userBalanceRecord = balanceRecordModel.order_by('-id')[:5] 
     
     if request.method == 'POST':
         form = transactionForm(request.POST)
@@ -85,6 +87,7 @@ def homeView(request):
     context = {
         'form': form,
         'recentUserTransactions': recentUserTransactions,
+        'userBalanceRecord': userBalanceRecord,
         'userBalance': userBalance,
         'savingsAmount': savingsAmount,
         'expensesAmount': expensesAmount,
