@@ -105,4 +105,12 @@ def transactionsView(request):
         'userTransactionsModel': userTransactionsModel,
     }
     
-    return render(request, 'transactions.html', context)       
+    return render(request, 'transactions.html', context)
+
+def statisticsView(request):
+    
+    context = {
+
+    }
+    
+    return render(request, 'statistics.html', context)       
