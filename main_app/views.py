@@ -1,11 +1,11 @@
-from datetime import date
-from re import A
+import datetime
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import userProfile, balanceRecord, transaction
 from .forms import transactionForm
+
 
 def index(request):
     current_user = request.user
@@ -113,4 +113,8 @@ def statisticsView(request):
 
     }
     
-    return render(request, 'statistics.html', context)       
+    return render(request, 'statistics.html', context)
+
+def statisticsBalanceView(request):
+
+    return render(request, 'statistics-balance.html')              
