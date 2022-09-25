@@ -117,4 +117,29 @@ def statisticsView(request):
 
 def statisticsBalanceView(request):
 
-    return render(request, 'statistics-balance.html')              
+    userObject = request.user
+    userProfileModel = userProfile.objects.get(username=userObject)
+    balanceRecordModel = balanceRecord.objects.filter(username=userProfileModel)
+
+    currentDate = datetime.datetime.now()
+    sevenDays = currentDate - datetime.timedelta(days=7)
+    thirdyDays = currentDate - datetime.timedelta(days=30)
+    twelveWeeks = currentDate - datetime.timedelta(weeks=12)
+    sixMonths = currentDate - datetime.timedelta(weeks=26)
+    oneYear = currentDate - datetime.timedelta(weeks=52)
+
+    sevenDaysBalanceRecord = balanceRecordModel.filter(date__range=(sevenDays, currentDate))
+    thirtyDaysBalanceRecord = balanceRecordModel.filter(date__range=(thirdyDays, currentDate))
+    twelveWeeksDaysBalanceRecord = balanceRecordModel.filter(date__range=(twelveWeeks, currentDate))
+    sixMonthsDaysBalanceRecord = balanceRecordModel.filter(date__range=(sixMonths, currentDate))
+    oneYearDaysBalanceRecord = balanceRecordModel.filter(date__range=(oneYear, currentDate))
+    
+    context = {
+        'sevenDaysBalanceRecord': sevenDaysBalanceRecord,
+        'thirtyDaysBalanceRecord': thirtyDaysBalanceRecord,
+        'twelveWeeksDaysBalanceRecord': twelveWeeksDaysBalanceRecord,
+        'sixMonthsDaysBalanceRecord': sixMonthsDaysBalanceRecord,
+        'oneYearDaysBalanceRecord': oneYearDaysBalanceRecord,
+    }
+    
+    return render(request, 'statistics-balance.html', context)              
