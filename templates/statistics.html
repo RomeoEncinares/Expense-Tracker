@@ -10,32 +10,13 @@
   </div>
 
   <div class="button-box pt-2 pb-3 mb-3 border-bottom">
-    <button type="button" class="btn btn-primary">Balance</button>
+    <a class="btn btn-primary" href="{% url 'statisticsBalance' %}">Balance</a>
     <button type="button" class="btn btn-primary">Cash-Flow</button>
     <button type="button" class="btn btn-primary">Spending</button>
     <button type="button" class="btn btn-primary">Reports</button>
-  </div>  
-  
-  <div class="table-responsive">
-    <table class="table table-striped table-sm">
-      <thead>
-        <tr>
-          <th scope="col">Date</th>
-          <th scope="col">Type</th>
-          <th scope="col">Category</th>
-          <th scope="col">Amount</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for transactions in userTransactionsModel reversed %}
-          <tr>
-            <td>{{transactions.date}}</td>
-            <td>{{transactions.transactionType}}</td>
-            <td>{{transactions.transactionCategory}}</td>
-            <td>{{transactions.amount}}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
   </div>
+  
+  {% block balance %}
+  {% endblock %}
+
 {% endblock %}
