@@ -142,4 +142,12 @@ def statisticsBalanceView(request):
         'oneYearDaysBalanceRecord': oneYearDaysBalanceRecord,
     }
     
-    return render(request, 'statistics-balance.html', context)              
+    return render(request, 'statistics-balance.html', context)       
+
+def statisticsCashFlowView(request):
+
+    context = {
+
+    }
+    
+    return render(request, 'statistics-cashflow.html', context)       
