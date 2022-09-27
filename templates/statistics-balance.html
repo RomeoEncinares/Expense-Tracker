@@ -1,7 +1,9 @@
 {% extends 'statistics.html' %}
 
 {% block balance %}
-  <canvas id="statisticsBalanceCanvas"></canvas>
+  <div class="statisticsBalanceCanvasContainer" style="height: 65vh">
+    <canvas id="statisticsBalanceCanvas"></canvas>
+  </div>
   <script>
           const statisticsBalanceVar = document.getElementById('statisticsBalanceCanvas').getContext('2d');
           const statisticsBalanceChart = new Chart(statisticsBalanceVar, {
@@ -25,6 +27,10 @@
                       hoverOffset: 5
                   }]
               },
+            options: {
+              maintainAspectRatio: false,
+              responsive: true,
+            }
           });
   </script>
 {% endblock %}
