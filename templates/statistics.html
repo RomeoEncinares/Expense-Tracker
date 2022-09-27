@@ -11,12 +11,15 @@
 
   <div class="button-box pt-2 pb-3 mb-3 border-bottom">
     <a class="btn btn-primary" href="{% url 'statisticsBalance' %}">Balance</a>
-    <button type="button" class="btn btn-primary">Cash-Flow</button>
+    <a class="btn btn-primary" href="{% url 'statisticsCashFlow' %}">Cash Flow</a>
     <button type="button" class="btn btn-primary">Spending</button>
     <button type="button" class="btn btn-primary">Reports</button>
   </div>
   
   {% block balance %}
+  {% endblock %}
+
+  {% block cashflow %}
   {% endblock %}
 
 {% endblock %}
