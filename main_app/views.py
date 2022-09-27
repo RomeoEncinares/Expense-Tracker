@@ -146,8 +146,31 @@ def statisticsBalanceView(request):
 
 def statisticsCashFlowView(request):
 
-    context = {
+    userObject = request.user
+    userProfileModel = userProfile.objects.get(username=userObject)
+    transactionRecordModel = transaction.objects.filter(username=userProfileModel)
 
+    currentDate = datetime.datetime.now()
+    sevenDays = currentDate - datetime.timedelta(days=7)
+    thirdyDays = currentDate - datetime.timedelta(days=30)
+    twelveWeeks = currentDate - datetime.timedelta(weeks=12)
+    sixMonths = currentDate - datetime.timedelta(weeks=26)
+    oneYear = currentDate - datetime.timedelta(weeks=52)
+
+    sevenDaysTransactionRecord = transactionRecordModel.filter(date__range=(sevenDays, currentDate))
+    thirtyDaysTransactionRecord = transactionRecordModel.filter(date__range=(thirdyDays, currentDate))
+    twelveWeeksDaysTransactionRecord = transactionRecordModel.filter(date__range=(twelveWeeks, currentDate))
+    sixMonthsDaysTransactionRecord = transactionRecordModel.filter(date__range=(sixMonths, currentDate))
+    oneYearDaysTransactionRecord = transactionRecordModel.filter(date__range=(oneYear, currentDate))
+
+    print(sevenDaysTransactionRecord)
+
+    context = {
+        'sevenDaysTransactionRecord': sevenDaysTransactionRecord,
+        'thirtyDaysTransactionRecord': thirtyDaysTransactionRecord,
+        'twelveWeeksDaysTransactionRecord': twelveWeeksDaysTransactionRecord,
+        'sixMonthsDaysTransactionRecord': sixMonthsDaysTransactionRecord,
+        'oneYearDaysTransactionRecord': oneYearDaysTransactionRecord,
     }
-    
+
     return render(request, 'statistics-cashflow.html', context)       
