@@ -1,5 +1,37 @@
 {% extends 'statistics.html' %}
 
 {% block cashflow %}
-  <h1>cashflow</h1>
+  <div class="statisticsBalanceCanvasContainer" style="height: 65vh">
+    <canvas id="statisticsCashFlowCanvas"></canvas>
+  </div>
+  <script>
+          const statisticsCashFlowVar = document.getElementById('statisticsCashFlowCanvas').getContext('2d');
+          const statisticsCashFlowChart = new Chart(statisticsCashFlowVar, {
+              type: 'bar',
+              data: {
+                  labels: [{% for record in sevenDaysTransactionRecord %} '{{record.date|date:"m/d"}}', {% endfor %}],
+                  datasets: [{
+                      label: 'Cash Flow',
+                      data: [{% for record in sevenDaysTransactionRecord%} {% if record.transactionType == "Expense" %} '{% widthratio record.amount 1 -1 %}' 
+                              {% else %} '{{record.amount}}' {% endif %}, {% endfor %}],
+                      backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)'
+                      ],
+                      borderColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)'
+                      ],
+                      borderWidth: 1,
+                      hoverOffset: 5
+                  }]
+              },
+            options: {
+              maintainAspectRatio: false,
+              responsive: true,
+            }
+          });
+  </script>
 {% endblock %}
