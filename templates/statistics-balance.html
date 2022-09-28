@@ -5,32 +5,32 @@
     <canvas id="statisticsBalanceCanvas"></canvas>
   </div>
   <script>
-          const statisticsBalanceVar = document.getElementById('statisticsBalanceCanvas').getContext('2d');
-          const statisticsBalanceChart = new Chart(statisticsBalanceVar, {
-              type: 'line',
-              data: {
-                  labels: [{% for record in sevenDaysBalanceRecord %} '{{record.date|date:"m/d"}}', {% endfor %}],
-                  datasets: [{
-                      label: 'Balance Breakdown',
-                      data: [{% for record in sevenDaysBalanceRecord%} '{{record.balance}}', {% endfor %}],
-                      backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                      ],
-                      borderColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                      ],
-                      borderWidth: 1,
-                      hoverOffset: 5
-                  }]
-              },
-            options: {
-              maintainAspectRatio: false,
-              responsive: true,
-            }
-          });
+    const statisticsBalanceVar = document.getElementById('statisticsBalanceCanvas').getContext('2d');
+    const statisticsBalanceChart = new Chart(statisticsBalanceVar, {
+        type: 'line',
+        data: {
+            labels: [{% for record in sevenDaysBalanceRecord %} '{{record.date|date:"m/d"}}', {% endfor %}],
+            datasets: [{
+                label: 'Balance Breakdown',
+                data: [{% for record in sevenDaysBalanceRecord%} '{{record.balance}}', {% endfor %}],
+                backgroundColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(54, 162, 235)',
+                  'rgb(255, 205, 86)'
+                ],
+                borderColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(54, 162, 235)',
+                  'rgb(255, 205, 86)'
+                ],
+                borderWidth: 1,
+                hoverOffset: 5
+            }]
+        },
+      options: {
+        maintainAspectRatio: false,
+        responsive: true,
+      }
+    });
   </script>
 {% endblock %}
