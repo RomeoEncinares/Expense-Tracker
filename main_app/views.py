@@ -173,4 +173,9 @@ def statisticsCashFlowView(request):
         'oneYearDaysTransactionRecord': oneYearDaysTransactionRecord,
     }
 
-    return render(request, 'statistics-cashflow.html', context)       
+    return render(request, 'statistics-cashflow.html', context)
+
+def statisticsSpendingView(request):
+
+    return render(request, 'statistics-spending.html')
+           
