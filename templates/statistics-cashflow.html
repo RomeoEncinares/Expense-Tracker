@@ -4,6 +4,13 @@
   <div class="statisticsBalanceCanvasContainer" style="height: 65vh">
     <canvas id="statisticsCashFlowCanvas"></canvas>
   </div>
+  <div class="button-container d-flex justify-content-center">
+    <button type="button" class="btn btn-primary" onclick="sevenDays()" >7D</button>
+    <button type="button" class="btn btn-primary" onclick="thirtyDays()" >30D</button>
+    <button type="button" class="btn btn-primary" onclick="twelveWeeks()" >12W</button>
+    <button type="button" class="btn btn-primary" onclick="sixMonths()" >6M</button>
+    <button type="button" class="btn btn-primary" onclick="oneYear()" >1Y</button>
+  </div>
   <script>
           const statisticsCashFlowVar = document.getElementById('statisticsCashFlowCanvas').getContext('2d');
           const statisticsCashFlowChart = new Chart(statisticsCashFlowVar, {
