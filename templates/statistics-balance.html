@@ -39,5 +39,29 @@
         responsive: true,
       }
     });
+
+    function thirtyDays() {
+      statisticsBalanceChart.data.labels = [{% for record in thirtyDaysBalanceRecord %} '{{record.date|date:"m/d"}}', {% endfor %}];
+      statisticsBalanceChart.data.datasets[0].data = [{% for record in thirtyDaysBalanceRecord %} '{{record.balance}}', {% endfor %}];
+      statisticsBalanceChart.update();
+    }
+    
+    function twelveWeeks() {
+      statisticsBalanceChart.data.labels = [{% for record in twelveWeeksDaysBalanceRecord %} '{{record.date|date:"m/d"}}', {% endfor %}];
+      statisticsBalanceChart.data.datasets[0].data = [{% for record in twelveWeeksDaysBalanceRecord %} '{{record.balance}}', {% endfor %}];
+      statisticsBalanceChart.update();
+    }
+
+    function sixMonths() {
+      statisticsBalanceChart.data.labels = [{% for record in sixMonthsDaysBalanceRecord %} '{{record.date|date:"m/d"}}', {% endfor %}];
+      statisticsBalanceChart.data.datasets[0].data = [{% for record in sixMonthsDaysBalanceRecord %} '{{record.balance}}', {% endfor %}];
+      statisticsBalanceChart.update();
+    }
+
+    function oneYear() {
+      statisticsBalanceChart.data.labels = [{% for record in oneYearDaysBalanceRecord %} '{{record.date|date:"m/d"}}', {% endfor %}];
+      statisticsBalanceChart.data.datasets[0].data = [{% for record in oneYearDaysBalanceRecord %} '{{record.balance}}', {% endfor %}];
+      statisticsBalanceChart.update();
+    }
   </script>
 {% endblock %}
