@@ -40,5 +40,33 @@
               responsive: true,
             }
           });
+
+    function thirtyDays() {
+      statisticsCashFlowChart.data.labels = [{% for record in thirtyDaysTransactionRecord %} '{{record.date|date:"m/d"}}', {% endfor %}];
+      statisticsCashFlowChart.data.datasets[0].data = [{% for record in thirtyDaysTransactionRecord %} {% if record.transactionType == "Expense" %} '{% widthratio record.amount 1 -1 %}' 
+      {% else %} '{{record.amount}}' {% endif %}, {% endfor %}];
+      statisticsCashFlowChart.update();
+    }
+    
+    function twelveWeeks() {
+      statisticsCashFlowChart.data.labels = [{% for record in twelveWeeksDaysTransactionRecord %} '{{record.date|date:"m/d"}}', {% endfor %}];
+      statisticsCashFlowChart.data.datasets[0].data = [{% for record in twelveWeeksDaysTransactionRecord%} {% if record.transactionType == "Expense" %} '{% widthratio record.amount 1 -1 %}' 
+      {% else %} '{{record.amount}}' {% endif %}, {% endfor %}];
+      statisticsCashFlowChart.update();
+    }
+
+    function sixMonths() {
+      statisticsCashFlowChart.data.labels = [{% for record in sixMonthsDaysTransactionRecord %} '{{record.date|date:"m/d"}}', {% endfor %}];
+      statisticsCashFlowChart.data.datasets[0].data = [{% for record in sixMonthsDaysTransactionRecord%} {% if record.transactionType == "Expense" %} '{% widthratio record.amount 1 -1 %}' 
+      {% else %} '{{record.amount}}' {% endif %}, {% endfor %}];
+      statisticsCashFlowChart.update();
+    }
+
+    function oneYear() {
+      statisticsCashFlowChart.data.labels = [{% for record in oneYearDaysTransactionRecord %} '{{record.date|date:"m/d"}}', {% endfor %}];
+      statisticsCashFlowChart.data.datasets[0].data = [{% for record in oneYearDaysTransactionRecord%} {% if record.transactionType == "Expense" %} '{% widthratio record.amount 1 -1 %}' 
+      {% else %} '{{record.amount}}' {% endif %}, {% endfor %}];
+      statisticsCashFlowChart.update();
+    }
   </script>
 {% endblock %}
