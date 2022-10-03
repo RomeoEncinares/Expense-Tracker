@@ -229,6 +229,11 @@ def statisticsReportView(request):
     ExpensetransactionRecordModel = transaction.objects.filter(username=userProfileModel, transactionType="Expense")
     IncometransactionRecordModel = transaction.objects.filter(username=userProfileModel, transactionType="Income")
 
+    transactionsTotal = {
+        'Income': {},
+        'Expenses': {},
+    }
+
     ExpensesCategories = {
         'Food & Drinks': {},
         'Shopping': {},
@@ -281,7 +286,22 @@ def statisticsReportView(request):
         IncomeCategories[category]['6M'] = 0 if incomeCategorySixMonthsSum['total']  is None else incomeCategorySixMonthsSum['total']
         IncomeCategories[category]['1Y'] = 0 if incomeCategoryOneYearSum['total']  is None else incomeCategoryOneYearSum['total']
 
+    for transactionTypeQuery in transactionsTotal:
+        transactionQuery = transaction.objects.filter(username=userProfileModel, transactionType=transactionTypeQuery)
+        transactionSevenDaysSum = transactionQuery.filter(date__range=(sevenDays, currentDate)).aggregate(total=Sum('amount'))
+        transactionThirtyDaysSum = transactionQuery.filter(date__range=(thirdyDays, currentDate)).aggregate(total=Sum('amount'))
+        transactionTwekveWeeksSum = transactionQuery.filter(date__range=(twelveWeeks, currentDate)).aggregate(total=Sum('amount'))
+        transactionSixMonthsSum = transactionQuery.filter(date__range=(sixMonths, currentDate)).aggregate(total=Sum('amount'))
+        transactionOneYearSum = transactionQuery.filter(date__range=(oneYear, currentDate)).aggregate(total=Sum('amount'))
+        
+        transactionsTotal[transactionTypeQuery]['7D'] =  0 if transactionSevenDaysSum['total'] is None else transactionSevenDaysSum['total']
+        transactionsTotal[transactionTypeQuery]['30D'] = 0 if transactionThirtyDaysSum['total']  is  None else transactionThirtyDaysSum['total']
+        transactionsTotal[transactionTypeQuery]['12W'] = 0 if transactionTwekveWeeksSum['total']  is None else transactionTwekveWeeksSum['total']
+        transactionsTotal[transactionTypeQuery]['6M'] = 0 if transactionSixMonthsSum['total']  is None else transactionSixMonthsSum['total']
+        transactionsTotal[transactionTypeQuery]['1Y'] = 0 if transactionOneYearSum['total']  is None else transactionOneYearSum['total']
+
     context = {
+        'transactionsTotal': transactionsTotal,
         'ExpensesCategories': ExpensesCategories,
         'IncomeCategories':IncomeCategories,
     }
