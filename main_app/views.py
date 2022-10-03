@@ -276,10 +276,10 @@ def statisticsReportView(request):
         incomeCategoryOneYearSum = categoryQuery.filter(date__range=(oneYear, currentDate)).aggregate(total=Sum('amount'))
         
         IncomeCategories[category]['7D'] =  0 if incomeCategorySevenDaysSum['total'] is None else incomeCategorySevenDaysSum['total']
-        IncomeCategories[category]['30D'] = 0 if incomeCategoryThirtyDaysSum is  None else incomeCategoryThirtyDaysSum['total']
-        IncomeCategories[category]['12W'] = 0 if incomeCategoryTwekveWeeksSum is None else incomeCategoryTwekveWeeksSum['total']
-        IncomeCategories[category]['6M'] = 0 if incomeCategorySixMonthsSum is None else incomeCategorySixMonthsSum['total']
-        IncomeCategories[category]['1Y'] = 0 if incomeCategoryOneYearSum is None else incomeCategoryOneYearSum['total']
+        IncomeCategories[category]['30D'] = 0 if incomeCategoryThirtyDaysSum['total']  is  None else incomeCategoryThirtyDaysSum['total']
+        IncomeCategories[category]['12W'] = 0 if incomeCategoryTwekveWeeksSum['total']  is None else incomeCategoryTwekveWeeksSum['total']
+        IncomeCategories[category]['6M'] = 0 if incomeCategorySixMonthsSum['total']  is None else incomeCategorySixMonthsSum['total']
+        IncomeCategories[category]['1Y'] = 0 if incomeCategoryOneYearSum['total']  is None else incomeCategoryOneYearSum['total']
 
     context = {
         'ExpensesCategories': ExpensesCategories,
