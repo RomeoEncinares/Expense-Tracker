@@ -231,7 +231,7 @@ def statisticsReportView(request):
 
     transactionsTotal = {
         'Income': {},
-        'Expenses': {},
+        'Expense': {},
     }
 
     ExpensesCategories = {
