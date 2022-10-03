@@ -1,4 +1,5 @@
 import datetime
+import re
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
@@ -220,4 +221,6 @@ def statisticsSpendingView(request):
     }
 
     return render(request, 'statistics-spending.html', context)
-           
+
+def statisticsReportView(request):
+    return render(request, 'statistics-report.html')
