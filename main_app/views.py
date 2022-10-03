@@ -223,4 +223,39 @@ def statisticsSpendingView(request):
     return render(request, 'statistics-spending.html', context)
 
 def statisticsReportView(request):
-    return render(request, 'statistics-report.html')
+
+    userObject = request.user
+    userProfileModel = userProfile.objects.get(username=userObject)
+    IncometransactionRecordModel = transaction.objects.filter(username=userProfileModel, transactionType="Income")
+
+    IncomeCategories = {
+        'Income': {},
+        'Others': {},
+    }
+
+    currentDate = datetime.datetime.now()
+    sevenDays = currentDate - datetime.timedelta(days=7)
+    thirdyDays = currentDate - datetime.timedelta(days=30)
+    twelveWeeks = currentDate - datetime.timedelta(weeks=12)
+    sixMonths = currentDate - datetime.timedelta(weeks=26)
+    oneYear = currentDate - datetime.timedelta(weeks=52)
+
+    for category in IncomeCategories:
+        categoryQuery = IncometransactionRecordModel.filter(transactionCategory=category)
+        incomeCategorySevenDaysSum = categoryQuery.filter(date__range=(sevenDays, currentDate)).aggregate(total=Sum('amount'))
+        incomeCategoryThirtyDaysSum = categoryQuery.filter(date__range=(thirdyDays, currentDate)).aggregate(total=Sum('amount'))
+        incomeCategoryTwekveWeeksSum = categoryQuery.filter(date__range=(twelveWeeks, currentDate)).aggregate(total=Sum('amount'))
+        incomeCategorySixMonthsSum = categoryQuery.filter(date__range=(sixMonths, currentDate)).aggregate(total=Sum('amount'))
+        incomeCategoryOneYearSum = categoryQuery.filter(date__range=(oneYear, currentDate)).aggregate(total=Sum('amount'))
+        
+        IncomeCategories[category]['7D'] =  0 if incomeCategorySevenDaysSum['total'] is None else incomeCategorySevenDaysSum['total']
+        IncomeCategories[category]['30D'] = 0 if incomeCategoryThirtyDaysSum is  None else incomeCategoryThirtyDaysSum['total']
+        IncomeCategories[category]['12W'] = 0 if incomeCategoryTwekveWeeksSum is None else incomeCategoryTwekveWeeksSum['total']
+        IncomeCategories[category]['6M'] = 0 if incomeCategorySixMonthsSum is None else incomeCategorySixMonthsSum['total']
+        IncomeCategories[category]['1Y'] = 0 if incomeCategoryOneYearSum is None else incomeCategoryOneYearSum['total']
+
+    context = {
+        'IncomeCategories':IncomeCategories,
+    }
+
+    return render(request, 'statistics-report.html', context)
