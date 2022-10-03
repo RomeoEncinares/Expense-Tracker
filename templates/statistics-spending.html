@@ -13,34 +13,34 @@
   </div>
 
   <script>
-          const statisticsSpendingVar = document.getElementById('statisticsSpendingCanvas').getContext('2d');
-          const statisticsSpendingChart = new Chart(statisticsSpendingVar, {
-              type: 'doughnut',
-              data: {
-                  labels: [{% for category in ExpensesCategories %} '{{category}}', {% endfor %}],
-                  datasets: [{
-                      label: 'Cash Flow',
-                      data: [{% for category, dates in ExpensesCategories.items %} {% if dates.7D == None %} '{{ 0 }}' 
-                              {% else %} '{{dates.7D}}' {% endif %}, {% endfor %}],
-                      backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                      ],
-                      borderColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                      ],
-                      borderWidth: 1,
-                      hoverOffset: 5
-                  }]
-              },
-            options: {
-              maintainAspectRatio: false,
-              responsive: true,
-            }
-          });
+    const statisticsSpendingVar = document.getElementById('statisticsSpendingCanvas').getContext('2d');
+    const statisticsSpendingChart = new Chart(statisticsSpendingVar, {
+        type: 'doughnut',
+        data: {
+            labels: [{% for category in ExpensesCategories %} '{{category}}', {% endfor %}],
+            datasets: [{
+                label: 'Cash Flow',
+                data: [{% for category, dates in ExpensesCategories.items %} {% if dates.7D == None %} '{{ 0 }}' 
+                        {% else %} '{{dates.7D}}' {% endif %}, {% endfor %}],
+                backgroundColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(54, 162, 235)',
+                  'rgb(255, 205, 86)'
+                ],
+                borderColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(54, 162, 235)',
+                  'rgb(255, 205, 86)'
+                ],
+                borderWidth: 1,
+                hoverOffset: 5
+            }]
+        },
+      options: {
+        maintainAspectRatio: false,
+        responsive: true,
+      }
+    });
 
     function sevenDays() {
       statisticsSpendingChart.data.datasets[0].data = [{% for category, dates in ExpensesCategories.items %} {% if dates.7D == None %} '{{ 0 }}' 
