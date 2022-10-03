@@ -13,7 +13,6 @@
     <a class="btn btn-primary" href="{% url 'statisticsBalance' %}">Balance</a>
     <a class="btn btn-primary" href="{% url 'statisticsCashFlow' %}">Cash Flow</a>
     <a class="btn btn-primary" href="{% url 'statisticsSpendingView' %}">Spending</a>
-    <a class="btn btn-primary" href="{% url 'statisticsReportView' %}">Reports</a>
   </div>
   
   {% block balance %}
@@ -23,9 +22,6 @@
   {% endblock %}
 
   {% block spending %}
-  {% endblock %}
-
-  {% block reports %}
   {% endblock %}
 
 {% endblock %}
