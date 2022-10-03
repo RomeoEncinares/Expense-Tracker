@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.db.models import Sum
 from .models import userProfile, balanceRecord, transaction
 from .forms import transactionForm
 
@@ -177,5 +178,40 @@ def statisticsCashFlowView(request):
 
 def statisticsSpendingView(request):
 
-    return render(request, 'statistics-spending.html')
+    userObject = request.user
+    userProfileModel = userProfile.objects.get(username=userObject)
+    ExpensetransactionRecordModel = transaction.objects.filter(username=userProfileModel, transactionType="Expense")
+
+    ExpensesCategories = {
+        'Food & Drinks': {},
+        'Shopping': {},
+        'Transportation': {},
+        'Vehicle': {},
+        'Life & Entertainment': {},
+        'PC, Communication': {},
+        'Financial Investment': {},
+        'Investments': {},
+        'Others': {},
+    }
+
+    currentDate = datetime.datetime.now()
+    sevenDays = currentDate - datetime.timedelta(days=7)
+    thirdyDays = currentDate - datetime.timedelta(days=30)
+    twelveWeeks = currentDate - datetime.timedelta(weeks=12)
+    sixMonths = currentDate - datetime.timedelta(weeks=26)
+    oneYear = currentDate - datetime.timedelta(weeks=52)
+
+    for category in ExpensesCategories:
+        categoryQuery = ExpensetransactionRecordModel.filter(transactionCategory=category)
+        expenseCategorySevenDaysSum = categoryQuery.filter(date__range=(sevenDays, currentDate)).aggregate(total=Sum('amount'))
+        expenseCategoryThirtyDaysSum = categoryQuery.filter(date__range=(thirdyDays, currentDate)).aggregate(total=Sum('amount'))
+        expenseCategoryTwekveWeeksSum = categoryQuery.filter(date__range=(twelveWeeks, currentDate)).aggregate(total=Sum('amount'))
+        expenseCategorySixMonthsSum = categoryQuery.filter(date__range=(sixMonths, currentDate)).aggregate(total=Sum('amount'))
+        expenseCategoryOneYearSum = categoryQuery.filter(date__range=(oneYear, currentDate)).aggregate(total=Sum('amount'))
+    
+    context = {
+        'ExpensesCategories': ExpensesCategories,
+    }
+
+    return render(request, 'statistics-spending.html', context)
            
