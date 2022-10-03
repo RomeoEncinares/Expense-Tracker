@@ -208,6 +208,12 @@ def statisticsSpendingView(request):
         expenseCategoryTwekveWeeksSum = categoryQuery.filter(date__range=(twelveWeeks, currentDate)).aggregate(total=Sum('amount'))
         expenseCategorySixMonthsSum = categoryQuery.filter(date__range=(sixMonths, currentDate)).aggregate(total=Sum('amount'))
         expenseCategoryOneYearSum = categoryQuery.filter(date__range=(oneYear, currentDate)).aggregate(total=Sum('amount'))
+
+        ExpensesCategories[category]['7D'] = expenseCategorySevenDaysSum['total']
+        ExpensesCategories[category]['30D'] = expenseCategoryThirtyDaysSum['total']
+        ExpensesCategories[category]['12W'] = expenseCategoryTwekveWeeksSum['total']
+        ExpensesCategories[category]['6M'] = expenseCategorySixMonthsSum['total']
+        ExpensesCategories[category]['1Y'] = expenseCategoryOneYearSum['total']
     
     context = {
         'ExpensesCategories': ExpensesCategories,
