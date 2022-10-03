@@ -226,7 +226,20 @@ def statisticsReportView(request):
 
     userObject = request.user
     userProfileModel = userProfile.objects.get(username=userObject)
+    ExpensetransactionRecordModel = transaction.objects.filter(username=userProfileModel, transactionType="Expense")
     IncometransactionRecordModel = transaction.objects.filter(username=userProfileModel, transactionType="Income")
+
+    ExpensesCategories = {
+        'Food & Drinks': {},
+        'Shopping': {},
+        'Transportation': {},
+        'Vehicle': {},
+        'Life & Entertainment': {},
+        'PC, Communication': {},
+        'Financial Investment': {},
+        'Investments': {},
+        'Others': {},
+    }
 
     IncomeCategories = {
         'Income': {},
@@ -240,6 +253,20 @@ def statisticsReportView(request):
     sixMonths = currentDate - datetime.timedelta(weeks=26)
     oneYear = currentDate - datetime.timedelta(weeks=52)
 
+    for category in ExpensesCategories:
+        categoryQuery = ExpensetransactionRecordModel.filter(transactionCategory=category)
+        expenseCategorySevenDaysSum = categoryQuery.filter(date__range=(sevenDays, currentDate)).aggregate(total=Sum('amount'))
+        expenseCategoryThirtyDaysSum = categoryQuery.filter(date__range=(thirdyDays, currentDate)).aggregate(total=Sum('amount'))
+        expenseCategoryTwekveWeeksSum = categoryQuery.filter(date__range=(twelveWeeks, currentDate)).aggregate(total=Sum('amount'))
+        expenseCategorySixMonthsSum = categoryQuery.filter(date__range=(sixMonths, currentDate)).aggregate(total=Sum('amount'))
+        expenseCategoryOneYearSum = categoryQuery.filter(date__range=(oneYear, currentDate)).aggregate(total=Sum('amount'))
+
+        ExpensesCategories[category]['7D'] = 0 if expenseCategorySevenDaysSum['total'] is None else expenseCategorySevenDaysSum['total']
+        ExpensesCategories[category]['30D'] = 0 if expenseCategoryThirtyDaysSum['total'] is None else expenseCategoryThirtyDaysSum['total']
+        ExpensesCategories[category]['12W'] = 0 if expenseCategoryTwekveWeeksSum['total'] is None else expenseCategoryTwekveWeeksSum['total']
+        ExpensesCategories[category]['6M'] = 0 if expenseCategorySixMonthsSum['total'] is None else expenseCategorySixMonthsSum['total']
+        ExpensesCategories[category]['1Y'] = 0 if expenseCategoryOneYearSum['total'] is None else expenseCategoryOneYearSum['total']
+    
     for category in IncomeCategories:
         categoryQuery = IncometransactionRecordModel.filter(transactionCategory=category)
         incomeCategorySevenDaysSum = categoryQuery.filter(date__range=(sevenDays, currentDate)).aggregate(total=Sum('amount'))
@@ -255,6 +282,7 @@ def statisticsReportView(request):
         IncomeCategories[category]['1Y'] = 0 if incomeCategoryOneYearSum is None else incomeCategoryOneYearSum['total']
 
     context = {
+        'ExpensesCategories': ExpensesCategories,
         'IncomeCategories':IncomeCategories,
     }
 
