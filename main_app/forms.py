@@ -1,5 +1,6 @@
 from django import forms
 from .models import transaction
+from django.contrib.auth.forms import UserCreationForm
 
 class transactionForm(forms.ModelForm):
     TRANSACTION_CHOICES = (('Income', 'Income'), ('Expense', 'Expense'))
@@ -23,3 +24,11 @@ class transactionForm(forms.ModelForm):
     class Meta:
         model = transaction
         fields = ['transactionType', 'transactionCategory', 'amount']
+
+class RegisterForm(UserCreationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control form-control-lg'}))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control form-control-lg'}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control form-control-lg'}))
+
+    def __init__(self, *args, **kwargs):
+        super(RegisterForm, self).__init__(*args, **kwargs)
