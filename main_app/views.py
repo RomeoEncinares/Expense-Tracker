@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.db.models import Sum
 from .models import userProfile, balanceRecord, transaction
-from .forms import transactionForm
+from .forms import transactionForm, RegisterForm
 
 
 def index(request):
@@ -15,10 +15,10 @@ def index(request):
     return render(request, 'index.html')
 
 def register(request):
-    form = UserCreationForm()
+    form = RegisterForm()
 
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid:
             form.save()
             return redirect('index')
