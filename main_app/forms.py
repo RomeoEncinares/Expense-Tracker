@@ -26,9 +26,9 @@ class transactionForm(forms.ModelForm):
         fields = ['transactionType', 'transactionCategory', 'amount']
 
 class RegisterForm(UserCreationForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control form-control-lg'}))
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control form-control-lg'}))
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control form-control-lg'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control form-control-lg', 'id':'formUsername', 'placeholder': 'Username'}))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control form-control-lg', 'id':'formPassword1', 'placeholder': 'Password'}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control form-control-lg', 'id':'formPassword2', 'placeholder': 'Confirm Password'}))
 
     def __init__(self, *args, **kwargs):
         super(RegisterForm, self).__init__(*args, **kwargs)
