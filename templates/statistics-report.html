@@ -1,0 +1,50 @@
+{% extends 'statistics.html' %}
+
+{% block reports %}
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <h1></h1>
+      <thead>
+        <tr>
+          <th scope="col">Income</th>
+          <th scope="col">{{transactionsTotal.Income.7D}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for categories, date in IncomeCategories.items  %}
+          <tr>
+            <td>{{categories}}</td>
+            <td id="IncomeDate">{{date.7D}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <h1></h1>
+      <thead>
+        <tr>
+          <th scope="col">Expenses</th>
+          <th scope="col">{{transactionsTotal.Expense.7D}}</th>
+        </tr>
+      </thead>
+      <tbody id="ExpensesDate">
+        {% for categories, date in ExpensesCategories.items  %}
+          <tr>
+            <td>{{categories}}</td>
+            <td>{{date.7D}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="button-container d-flex justify-content-center">
+    <button type="button" class="btn btn-primary" onclick="sevenDays()" >7D</button>
+    <button type="button" class="btn btn-primary" onclick="thirtyDays()" >30D</button>
+    <button type="button" class="btn btn-primary" onclick="twelveWeeks()" >12W</button>
+    <button type="button" class="btn btn-primary" onclick="sixMonths()" >6M</button>
+    <button type="button" class="btn btn-primary" onclick="oneYear()" >1Y</button>
+  </div>
+{% endblock %}
