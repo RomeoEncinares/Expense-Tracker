@@ -36,7 +36,7 @@ def loginView(request):
         if user is not None:
             login(request, user)
             print('Success')
-            redirect('index')
+            return redirect('home')
             
     return render(request, 'login.html')
 
