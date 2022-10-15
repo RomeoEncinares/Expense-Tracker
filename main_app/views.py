@@ -95,6 +95,7 @@ def homeView(request):
 
     return render(request, 'home.html', context)
 
+@login_required
 def transactionsView(request):
 
     userObject = request.user
