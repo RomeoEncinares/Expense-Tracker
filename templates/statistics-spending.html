@@ -49,25 +49,25 @@
     }      
 
     function thirtyDays() {
-      statisticsSpendingChart.data.datasets[0].data = [{% for category, dates in ExpensesCategories.items %} {% if dates.7D == None %} '{{ 0 }}' 
+      statisticsSpendingChart.data.datasets[0].data = [{% for category, dates in ExpensesCategories.items %} {% if dates.30D == None %} '{{ 0 }}' 
       {% else %} '{{dates.30D}}' {% endif %}, {% endfor %}];
       statisticsSpendingChart.update();
     }
     
     function twelveWeeks() {
-      statisticsSpendingChart.data.datasets[0].data = [{% for category, dates in ExpensesCategories.items %} {% if dates.7D == None %} '{{ 0 }}' 
+      statisticsSpendingChart.data.datasets[0].data = [{% for category, dates in ExpensesCategories.items %} {% if dates.12W == None %} '{{ 0 }}' 
       {% else %} '{{dates.12W}}' {% endif %}, {% endfor %}];
       statisticsSpendingChart.update();
     }
 
     function sixMonths() {
-      statisticsSpendingChart.data.datasets[0].data = [{% for category, dates in ExpensesCategories.items %} {% if dates.7D == None %} '{{ 0 }}' 
+      statisticsSpendingChart.data.datasets[0].data = [{% for category, dates in ExpensesCategories.items %} {% if dates.6M == None %} '{{ 0 }}' 
       {% else %} '{{dates.6M}}' {% endif %}, {% endfor %}];
       statisticsSpendingChart.update();
     }
 
     function oneYear() {
-      statisticsSpendingChart.data.datasets[0].data = [{% for category, dates in ExpensesCategories.items %} {% if dates.7D == None %} '{{ 0 }}' 
+      statisticsSpendingChart.data.datasets[0].data = [{% for category, dates in ExpensesCategories.items %} {% if dates.1Y == None %} '{{ 0 }}' 
       {% else %} '{{dates.1Y}}' {% endif %}, {% endfor %}];
       statisticsSpendingChart.update();
     }
