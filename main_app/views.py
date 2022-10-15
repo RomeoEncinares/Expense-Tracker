@@ -117,6 +117,7 @@ def statisticsView(request):
     
     return render(request, 'statistics.html', context)
 
+@login_required
 def statisticsBalanceView(request):
 
     userObject = request.user
@@ -146,6 +147,7 @@ def statisticsBalanceView(request):
     
     return render(request, 'statistics-balance.html', context)       
 
+@login_required
 def statisticsCashFlowView(request):
 
     userObject = request.user
