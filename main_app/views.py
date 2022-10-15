@@ -108,6 +108,7 @@ def transactionsView(request):
     
     return render(request, 'transactions.html', context)
 
+@login_required
 def statisticsView(request):
     
     context = {
