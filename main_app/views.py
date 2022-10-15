@@ -179,6 +179,7 @@ def statisticsCashFlowView(request):
 
     return render(request, 'statistics-cashflow.html', context)
 
+@login_required
 def statisticsSpendingView(request):
 
     userObject = request.user
