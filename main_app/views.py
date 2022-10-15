@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.db.models import Sum
 from .models import userProfile, balanceRecord, transaction
 from .forms import transactionForm, RegisterForm
-
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     current_user = request.user
@@ -40,6 +40,7 @@ def loginView(request):
             
     return render(request, 'login.html')
 
+@login_required
 def homeView(request):
     form = transactionForm
 
