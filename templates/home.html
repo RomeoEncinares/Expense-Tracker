@@ -1,154 +1,154 @@
 {% extends 'base.html' %}
 
 {% block home %}
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Overview</h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">Overview</h1>
+      <div class="btn-toolbar mb-2 mb-md-0">
+      </div>
+  </div>
+
+  <div class="row"> 
+
+    <div class="col">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col">
+              <h5 class="card-title">Transactions</h5>
             </div>
-        </div>
+            <div class="col">
+              <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button>
+            </div>
+          </div>
 
-        <div class="row"> 
+          <div class="row">
+            {% for transactions in recentUserTransactions %}
+            <div class="row">
+              <div class="col">
+                {{transactions.transactionCategory}}
+              </div>
+              <div class="col">
+                {% if transactions.transactionType == "Expense"%}
+                  - {{transactions.amount}}
+                {% else %}
+                  + {{transactions.amount}}
+                {% endif %}
+              </div>
+            </div>
+              <br>
+            {% endfor %}
+          </div>
+      </div>
+    </div>
+  </div>  
 
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-              <div class="card-body">
-
-                <div class="row">
-                  <div class="col">
-                    <h5 class="card-title">Transactions</h5>
-                  </div>
-                  <div class="col">
-                    <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button>
-                  </div>
-                </div>
-
-                <div class="row">
-                  {% for transactions in recentUserTransactions %}
-                  <div class="row">
-                    <div class="col">
-                      {{transactions.transactionCategory}}
+    <!-- Add Transacton Modal  -->
+    <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Transactions</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="POST">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label"></label>
+                  {% for radio in form.transactionType %}
+                    <div class="myradio">
+                      {{ radio }}
                     </div>
-                    <div class="col">
-                      {% if transactions.transactionType == "Expense"%}
-                        - {{transactions.amount}}
-                      {% else %}
-                        + {{transactions.amount}}
-                      {% endif %}
-                    </div>
-                  </div>
-                    <br>
                   {% endfor %}
-                </div>
-            </div>
-          </div>
-        </div>  
-
-          <!-- Add Transacton Modal  -->
-          <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Transactions</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form method="POST">
-                    {% csrf_token %}
-                    <div class="mb-3">
-                      <label for="recipient-name" class="col-form-label"></label>
-                        {% for radio in form.transactionType %}
-                          <div class="myradio">
-                            {{ radio }}
-                          </div>
-                        {% endfor %}
-                    </div>
-                    <div class="mb-3">
-                      <label for="recipient-name" class="col-form-label">Category</label>
-                      {{ form.transactionCategory }}
-                    </div>
-                    <div class="mb-3">
-                      <label for="amount" class="col-form-label">Transaction Type</label>
-                      {{form.amount}}
-                    </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Add Transaction</button>
-                </div>
-              </form>
               </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title  ">Summary</h5>
-                <canvas id="balanceHistoryChart" width="250" height="250"></canvas>     
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Category</label>
+                {{ form.transactionCategory }}
               </div>
-            </div>
-          </div> 
-
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">Summary</h5>
-                <canvas id="balanceDoughnutChart" width="250" height="250"></canvas>     
+              <div class="mb-3">
+                <label for="amount" class="col-form-label">Transaction Type</label>
+                {{form.amount}}
               </div>
-            </div>
           </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Add Transaction</button>
+          </div>
+        </form>
         </div>
+      </div>
+    </div>
 
-        <script>
-          const ctx = document.getElementById('balanceDoughnutChart').getContext('2d');
-          const balanceDoughnutChart = new Chart(ctx, {
-              type: 'doughnut',
-              data: {
-                  labels: ['Income', 'Expenses'],
-                  datasets: [{
-                      label: 'Balance Breakdown',
-                      data: ['{{savingsAmount}}', '{{expensesAmount}}'],
-                      backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                      ],
-                      borderColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                      ],
-                      borderWidth: 1,
-                      hoverOffset: 5
-                  }]
-              },
-          });
-          
-          const cty = document.getElementById('balanceHistoryChart').getContext('2d');
-          const balanceHistoryChart = new Chart(cty, {
-              type: 'line',
-              data: {
-                  labels: [{% for record in userBalanceRecord reversed %} '{{record.date|date:"m/d"}}', {% endfor %}],
-                  datasets: [{
-                      label: 'Balance Breakdown',
-                      data: [{% for record in userBalanceRecord reversed %} '{{record.balance}}', {% endfor %}],
-                      backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                      ],
-                      borderColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                      ],
-                      borderWidth: 1,
-                      hoverOffset: 5
-                  }]
-              },
-          });
-      </script>
+    <div class="col">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title  ">Summary</h5>
+          <canvas id="balanceHistoryChart" width="250" height="250"></canvas>     
+        </div>
+      </div>
+    </div> 
+
+    <div class="col">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Summary</h5>
+          <canvas id="balanceDoughnutChart" width="250" height="250"></canvas>     
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('balanceDoughnutChart').getContext('2d');
+    const balanceDoughnutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Income', 'Expenses'],
+            datasets: [{
+                label: 'Balance Breakdown',
+                data: ['{{savingsAmount}}', '{{expensesAmount}}'],
+                backgroundColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(54, 162, 235)',
+                  'rgb(255, 205, 86)'
+                ],
+                borderColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(54, 162, 235)',
+                  'rgb(255, 205, 86)'
+                ],
+                borderWidth: 1,
+                hoverOffset: 5
+            }]
+        },
+    });
+    
+    const cty = document.getElementById('balanceHistoryChart').getContext('2d');
+    const balanceHistoryChart = new Chart(cty, {
+        type: 'line',
+        data: {
+            labels: [{% for record in userBalanceRecord reversed %} '{{record.date|date:"m/d"}}', {% endfor %}],
+            datasets: [{
+                label: 'Balance Breakdown',
+                data: [{% for record in userBalanceRecord reversed %} '{{record.balance}}', {% endfor %}],
+                backgroundColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(54, 162, 235)',
+                  'rgb(255, 205, 86)'
+                ],
+                borderColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(54, 162, 235)',
+                  'rgb(255, 205, 86)'
+                ],
+                borderWidth: 1,
+                hoverOffset: 5
+            }]
+        },
+    });
+  </script>
 </body>
     
 {% endblock %}
