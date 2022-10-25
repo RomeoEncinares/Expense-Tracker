@@ -91,8 +91,8 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Add Transaction</button>
+          <button type="button" class="btn close-button" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn submit-button">Add Transaction</button>
         </div>
       </form>
       </div>
@@ -109,14 +109,12 @@
                 label: 'Balance Breakdown',
                 data: ['{{savingsAmount}}', '{{expensesAmount}}'],
                 backgroundColor: [
-                  'rgb(255, 99, 132)',
-                  'rgb(54, 162, 235)',
-                  'rgb(255, 205, 86)'
+                  'rgb(33,191,117)',
+                  'rgb(253,95,83)',
                 ],
                 borderColor: [
-                  'rgb(255, 99, 132)',
-                  'rgb(54, 162, 235)',
-                  'rgb(255, 205, 86)'
+                  'rgb(33,191,117)',
+                  'rgb(253,95,83)',
                 ],
                 borderWidth: 1,
                 hoverOffset: 5
