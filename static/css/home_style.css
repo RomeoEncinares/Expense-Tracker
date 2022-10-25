@@ -25,3 +25,15 @@ body {
     margin: 0 1em 0 0.1em;
     padding: 0.2em 1em 0 0.2em;
 }
+
+.modal-footer {
+    color:#ffffff;
+}
+
+.modal-footer .submit-button{
+    background-color:#21bf73;
+}
+
+.modal-footer .close-button {
+    background-color:#dc3545;
+}
