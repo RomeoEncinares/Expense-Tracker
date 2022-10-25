@@ -10,12 +10,10 @@
       </div>
   </div>
 
-  <div class="row"> 
-
+  <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col">
-      <div class="card" style="width: 18rem;">
+      <div class="card h-100">
         <div class="card-body">
-
           <div class="row">
             <div class="col">
               <h5 class="card-title">Transactions</h5>
@@ -24,7 +22,6 @@
               <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button>
             </div>
           </div>
-
           <div class="row">
             {% for transactions in recentUserTransactions %}
             <div class="row">
@@ -42,9 +39,26 @@
               <br>
             {% endfor %}
           </div>
+        </div>
       </div>
     </div>
-  </div>  
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title  ">Summary</h5>
+          <canvas id="balanceHistoryChart" width="250" height="250"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Summary</h5>
+          <canvas id="balanceDoughnutChart" width="250" height="250"></canvas>     
+        </div>
+      </div>
+    </div>
+  </div>
 
     <!-- Add Transacton Modal  -->
     <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -82,25 +96,6 @@
         </div>
       </div>
     </div>
-
-    <div class="col">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title  ">Summary</h5>
-          <canvas id="balanceHistoryChart" width="250" height="250"></canvas>     
-        </div>
-      </div>
-    </div> 
-
-    <div class="col">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Summary</h5>
-          <canvas id="balanceDoughnutChart" width="250" height="250"></canvas>     
-        </div>
-      </div>
-    </div>
-  </div>
 
   <script>
     const ctx = document.getElementById('balanceDoughnutChart').getContext('2d');
