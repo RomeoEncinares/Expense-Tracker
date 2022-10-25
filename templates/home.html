@@ -143,15 +143,15 @@
                 label: 'Balance Breakdown',
                 data: [{% for record in userBalanceRecord reversed %} '{{record.balance}}', {% endfor %}],
                 backgroundColor: [
-                  'rgb(255, 99, 132)',
-                  'rgb(54, 162, 235)',
-                  'rgb(255, 205, 86)'
+                  'rgb(33,191,115)',
+                  'rgb(31,85,65)',
                 ],
                 borderColor: [
-                  'rgb(255, 99, 132)',
-                  'rgb(54, 162, 235)',
-                  'rgb(255, 205, 86)'
+                  'rgb(33,191,115)',
+                  'rgb(31,85,65)',
                 ],
+                fill: true,
+                backgroundColor: 'rgb(39,90,70)',
                 borderWidth: 1,
                 hoverOffset: 5
             }]
