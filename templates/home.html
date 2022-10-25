@@ -125,6 +125,16 @@
                 hoverOffset: 5
             }]
         },
+        options: {
+          plugins: {
+              legend: {
+                  display: true,
+                  labels: {
+                    color: 'rgb(255,255,255)'
+                  }
+              }
+          },
+       }
     });
     
     const cty = document.getElementById('balanceHistoryChart').getContext('2d');
