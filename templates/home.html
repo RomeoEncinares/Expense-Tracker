@@ -22,14 +22,14 @@
               <button class="btn float-end" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button>
             </div>
           </div>
-          <div class="row">
+          <div class="row transaction-history-container">
             {% for transactions in recentUserTransactions %}
-            <div class="row">
+            <div class="row transaction-history">
               <div class="col">
                 <span>{{transactions.transactionCategory}}</span>
               </div>
               <div class="col">
-                <span>
+                <span class="float-end">
                   {% if transactions.transactionType == "Expense"%}
                     - {{transactions.amount}}
                   {% else %}
