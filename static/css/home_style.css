@@ -10,3 +10,8 @@ body {
 .fa-plus {
     color: #ffffff;
 }
+
+.modal-content {
+    background-color: #2a2e31;
+    color: #ffffff;
+}
