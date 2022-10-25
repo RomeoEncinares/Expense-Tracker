@@ -26,14 +26,16 @@
             {% for transactions in recentUserTransactions %}
             <div class="row">
               <div class="col">
-                {{transactions.transactionCategory}}
+                <span>{{transactions.transactionCategory}}</span>
               </div>
               <div class="col">
-                {% if transactions.transactionType == "Expense"%}
-                  - {{transactions.amount}}
-                {% else %}
-                  + {{transactions.amount}}
-                {% endif %}
+                <span>
+                  {% if transactions.transactionType == "Expense"%}
+                    - {{transactions.amount}}
+                  {% else %}
+                    + {{transactions.amount}}
+                  {% endif %}
+                </span>
               </div>
             </div>
               <br>
