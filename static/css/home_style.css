@@ -6,13 +6,10 @@ body {
 .card {
     background-color: #2a2e31;
 }
-  
-.fa-plus {
-    color: #ffffff;
-}
 
-.modal-content {
-    background-color: #2a2e31;
+/* Transaction Card */
+
+.fa-plus {
     color: #ffffff;
 }
 
@@ -26,6 +23,8 @@ body {
     padding: 0.2em 1em 0 0.2em;
 }
 
+/* Modal */
+
 .modal-footer {
     color:#ffffff;
 }
@@ -36,4 +35,9 @@ body {
 
 .modal-footer .close-button {
     background-color:#dc3545;
+}
+
+.modal-content {
+    background-color: #2a2e31;
+    color: #ffffff;
 }
