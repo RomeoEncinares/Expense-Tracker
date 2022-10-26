@@ -1,6 +1,8 @@
 {% extends 'statistics.html' %}
+{% load static %}
 
 {% block balance %}
+  <link rel="stylesheet" href="{% static 'css/statistics_style.css' %}">
   <div class="statisticsBalanceCanvasContainer" style="height: 65vh">
     <canvas id="statisticsBalanceCanvas"></canvas>
   </div>
