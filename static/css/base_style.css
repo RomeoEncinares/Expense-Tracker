@@ -63,3 +63,6 @@ body {
   font-size: .75rem;
 }
 
+.nav-link span {
+  padding-left: 0.5em;
+}
