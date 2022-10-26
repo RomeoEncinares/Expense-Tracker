@@ -8,3 +8,16 @@
     border: #21bf73;
     transform: scale(1.2);
 }
+
+.button-container .btn-primary{
+    min-width: 50px;
+    margin: 0.2em;
+    background-color: #2a2e31 !important;
+    border: #2a2e31;
+}
+
+.button-container .btn-primary:hover{
+    background-color: #21bf73 !important;
+    border: #21bf73;
+    transform: scale(1.2);
+}
