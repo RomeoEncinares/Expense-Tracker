@@ -2,3 +2,9 @@
     background-color: #2a2e31 !important;
     border: #2a2e31;
 }
+
+.button-box .btn-primary:hover{
+    background-color: #21bf73 !important;
+    border: #21bf73;
+    transform: scale(1.2);
+}
