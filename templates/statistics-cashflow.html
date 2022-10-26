@@ -21,16 +21,8 @@
                       label: 'Cash Flow',
                       data: [{% for record in sevenDaysTransactionRecord%} {% if record.transactionType == "Expense" %} '{% widthratio record.amount 1 -1 %}' 
                               {% else %} '{{record.amount}}' {% endif %}, {% endfor %}],
-                      backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                      ],
-                      borderColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                      ],
+                      backgroundColor: barColor(),
+                      borderColor: borderColor(),
                       borderWidth: 1,
                       hoverOffset: 5
                   }]
@@ -45,6 +37,26 @@
               responsive: true,
             }
           });
+    
+    function barColor() {
+      return(ctx) => {
+        console.log(ctx.raw)
+        const standard = 0;
+        const expenses = ctx.raw;
+        const color = expenses > standard ? 'rgb(33,191,115)' : expenses <= standard ? 'rgb(253,95,83)' : 'black';
+        return color;
+      }
+    }
+
+    function borderColor() {
+      return(ctx) => {
+        console.log(ctx.raw)
+        const standard = 0;
+        const expenses = ctx.raw;
+        const color = expenses > standard ? 'rgb(33,191,115)' : expenses <= standard ? 'rgb(253,95,83)' : 'black';
+        return color;
+      }
+    }
 
     function thirtyDays() {
       statisticsCashFlowChart.data.labels = [{% for record in thirtyDaysTransactionRecord %} '{{record.date|date:"m/d"}}', {% endfor %}];
